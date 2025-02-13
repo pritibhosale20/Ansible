@@ -7,3 +7,6 @@ $ sudo apt install -y ansible
 
 ## About
 This repository contains Ansible playbooks to automate server setup.
+
+## command- Running the Ansible Playbook
+ansible-playbook -i inventory filename.yml
