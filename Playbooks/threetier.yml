@@ -1,5 +1,5 @@
 # Ansible Playbook for Three-Tier Architecture Deployment
-## define inventory—the list of managed hosts
+## define inventory—the list of managed hosts(nano inventory.ini)
 # [webserver]
 # private_ip_of_web_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_webserver
 # [appserver]
