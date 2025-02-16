@@ -1,5 +1,5 @@
 - name: install LEMP on localhost
-  hosts: webserver
+  hosts: webservers
   become: true
   tasks:
    - name: install nginx
