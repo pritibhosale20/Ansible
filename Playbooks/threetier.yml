@@ -1,11 +1,11 @@
-# Ansible Playbook for Three-Tier Architecture Deployment
-# define inventory—the list of managed hosts
-[webserver]
-private_ip_of_web_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_webserver
-[appserver]
-private_ip_of_app_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_appserver
-[dbserver]
-private_ip_of_db_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_dbserver
+** Ansible Playbook for Three-Tier Architecture Deployment **
+## define inventory—the list of managed hosts
+# [webserver]
+# private_ip_of_web_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_webserver
+# [appserver]
+# private_ip_of_app_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_appserver
+# [dbserver]
+# private_ip_of_db_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_dbserver
 
 - name: myplay1
   hosts: all
