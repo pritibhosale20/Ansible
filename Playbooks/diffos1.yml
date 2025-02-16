@@ -1,7 +1,7 @@
 ## This Ansible playbook automates the installation and configuration of the LEMP stack (Linux, Nginx, MySQL, PHP) on Ubuntu servers. 
 ## It ensures that each task runs only if the target system is Ubuntu, using the condition: **when: ansible_facts['distribution'] == "Ubuntu"**
 - name: myplay1
-  hosts: webserver
+  hosts: webservers
   become: true
   tasks:
    - name: update package manager in Ubuntu
