@@ -1,0 +1,69 @@
+## This Ansible playbook automates the installation and configuration of the LEMP stack (Linux, Nginx, MySQL, PHP) on Ubuntu servers. 
+## It ensures that each task runs only if the target system is Ubuntu, using the condition: **when: ansible_facts['distribution'] == "Ubuntu"**
+- name: myplay1
+  hosts: webserver
+  become: true
+  tasks:
+   - name: update package manager in Ubuntu
+     shell: apt update
+     when: ansible_facts['distribution']=="Ubuntu"
+   - name: update package manager in A. Linux
+     dnf:
+      name: '*'
+      state: latest
+     when: ansible_facts['distribution']=="Amazon"
+   - name: install LEMP on ubuntu server
+     apt:
+      name: "{{ item }}"
+      state: present
+     when: ansible_facts['distribution']=="Ubuntu"
+     with_items:
+      - nginx
+      - php
+      - php8.3-fpm
+      - mariadb-server
+   - name: install LEMP on A.Linux server
+     dnf:
+      name: "{{ item }}"
+      state: present
+     when: ansible_facts['distribution']=="Amazon"
+     with_items:
+      - nginx
+      - php
+      - mariadb105-server
+   - name: start all service in ubuntu server
+     service:
+      name: "{{ item }}"
+      state: started
+     when: ansible_facts['distribution']=="Ubuntu"
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+   - name: start all service in A.Linux server
+     service:
+      name: "{{ item }}"
+      state: started
+     when: ansible_facts['distribution']=="Amazon"
+     with_items:
+      - nginx
+      - php-fpm
+      - mariadb
+   - name: restart all service im ubuntu server
+     service:
+      name: "{{ item }}"
+      state: restarted
+     when: ansible_facts['distribution']=="Ubuntu"
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+   - name: restart all service in A.linux server
+     service:
+      name: "{{ item }}"
+      state: restarted
+     when: ansible_facts['distribution']=="Amazon"
+     with_items:
+      - nginx
+      - php-fpm
+      - mariadb
