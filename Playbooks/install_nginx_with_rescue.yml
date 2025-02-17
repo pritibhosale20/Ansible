@@ -1,0 +1,18 @@
+# Ansible Playbook for Nginx Installation with Error Handling
+# Run the playbook: ansible-playbook playbookname.yml
+
+- name: myplay1
+  hosts: localhost
+  become: true
+  connection: local
+  tasks:
+   - block:
+      - name:  install nginx
+        dnf: name=nginx state=present
+      - debug: msg="in block"
+     rescue:
+      - name: install
+        apt: name=nginx state=present
+      - debug: msg="in Resscue"
+     always:
+      - debug: msg="in always"
