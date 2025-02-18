@@ -1,14 +1,8 @@
-# This Ansible playbook automates the installation and configuration of MariaDB on a remote server. It:
+# This Ansible playbook automates the installation and configuration of MariaDB on a remote server 
 # Updates system packages
 # Installs required dependencies (MariaDB, Python modules)
 # Starts and enables MariaDB service
 # Creates a MySQL user with secure credentials
-
-# Create a mypass.yml file and add mysql credentials
-# nano mypass.yml
-# username: myuser
-# password: mysecurepassword
-# encrypt this file using command- ansible-vault encrypt mypass.yml
 
 #playbook- nano mariadb-setup.yml
 - name: Setup MariaDB with Secure MySQL User
@@ -16,30 +10,25 @@
   become: yes
   vars_files:
     - mypass.yml  # this file contains username and password
-
   tasks:
     - name: Update all packages
       yum:
         name: '*'
         state: latest
-
     - name: Install required packages
       yum:
         name:
           - python3-pip
           - mariadb105-server
         state: present
-
     - name: Install Python MySQL module
       pip:
         name: PyMySQL
-
     - name: Start and enable MariaDB service
       service:
         name: mariadb
         state: started
         enabled: yes
-
     - name: Create MySQL user
       mysql_user:
         name: "{{ username }}"
@@ -50,6 +39,12 @@
         login_unix_socket: /var/lib/mysql/mysql.sock
         check_implicit_admin: yes
         update_password: always
+
+# Create a mypass.yml file and add mysql credentials
+# nano mypass.yml
+# username: myuser
+# password: mysecurepassword
+# encrypt this file using command- ansible-vault encrypt mypass.yml
 
 # Run the Playbook: ansible-playbook -i inventory.ini mariadb-setup.yml
 
