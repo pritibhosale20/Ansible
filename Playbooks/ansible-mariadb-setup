@@ -9,40 +9,34 @@
   hosts: myserver
   become: yes
   vars_files:
-    - mypass.yml  # this file contains username and password
+    - mypass.yml
   tasks:
-    - name: Update all packages
+    - name: update yum
+      yum: name='*' state=latest
+    - name: install pip
+      shell: "yum install python3-pip"
+    - name: install Python MySQL Module
+      command: "pip install PyMySQL"
+    - name: install mariadb
       yum:
-        name: '*'
-        state: latest
-    - name: Install required packages
-      yum:
-        name:
-          - python3-pip
-          - mariadb105-server
+        name: mariadb105-server
         state: present
-    - name: Install Python MySQL module
-      pip:
-        name: PyMySQL
-    - name: Start and enable MariaDB service
+    - name: starting mariadb
       service:
         name: mariadb
         state: started
-        enabled: yes
-    - name: Create MySQL user
+    - name: login mysql
       mysql_user:
         name: "{{ username }}"
         password: "{{ password }}"
-        priv: '*.*:ALL'
-        host: '%'
-        state: present
         login_unix_socket: /var/lib/mysql/mysql.sock
         check_implicit_admin: yes
         update_password: always
+        state: present
 
 # Create a mypass.yml file and add mysql credentials
 # nano mypass.yml
-# username: myuser
+# username: root
 # password: mysecurepassword
 # encrypt this file using command- ansible-vault encrypt mypass.yml
 
