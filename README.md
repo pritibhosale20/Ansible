@@ -13,7 +13,6 @@ $ sudo apt install -y ansible
 ansible-playbook -i inventory filename.yml
 
 ## define inventory—the list of managed hosts
-```bash
 $ nano inventory.ini
 list hosts in it
 [localhost]
