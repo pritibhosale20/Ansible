@@ -15,11 +15,9 @@ ansible-playbook -i inventory filename.yml
 ## define inventory—the list of managed hosts
 ```bash
 $ nano inventory.ini
-```bash
 list hosts in it
 [localhost]
 127.0.0.1
-
 [webservers]
 private_ip_of_host_server ansible_ssh_user=ubuntu ansible_private_key_file=privatekey_of_host
 
