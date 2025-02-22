@@ -14,7 +14,7 @@ ansible-playbook -i inventory filename.yml
 
 ## define inventory—the list of managed hosts
 $ nano inventory.ini
-list hosts in it
+## list hosts in it
 [localhost]
 127.0.0.1
 [webservers]
